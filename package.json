@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "vite build --watch --mode development",
+    "build": "tsc -b && vite build",
+    "sync": "find \"$OBSIDIAN\" -type d -path \"*/.obsidian/plugins\" -exec cp -rf public/. {}/codeblock \\;"
+  },
+  "devDependencies": {
+    "@shikijs/colorized-brackets": "^3.6.0",
+    "@shikijs/transformers": "^3.6.0",
+    "@types/node": "^22.15.29",
+    "builtin-modules": "^5.0.0",
+    "obsidian": "^1.8.7",
+    "shiki": "^3.6.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

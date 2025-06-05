@@ -1,0 +1,9 @@
+{
+  "id": "syntax-highlighter",
+  "name": "Syntax Highlighter",
+  "description": "A beautiful yet powerful syntax highlighter by Shiki.",
+  "version": "1.0.0",
+  "minAppVersion": "1.8.10",
+  "author": "Boboon",
+  "isDesktopOnly": false
+}

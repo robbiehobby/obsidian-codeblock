@@ -1,0 +1,181 @@
+body {
+  --codeblock-padding-y: var(--size-4-4);
+  --codeblock-padding-x: var(--size-4-5);
+
+  --codeblock-line-background-hover: rgb(var(--mono-rgb-100), 0.08);
+
+  --codeblock-line-number-width: 6ch;
+  --codeblock-line-number-space: var(--size-4-4);
+  --codeblock-line-number-color: var(--text-faint);
+  --codeblock-line-number-color-hover: var(--code-normal);
+
+  --codeblock-highlighted-background: rgb(var(--mono-rgb-100), 0.05);
+  --codeblock-warning-background: rgb(var(--color-orange-rgb), 0.1);
+  --codeblock-warning-background-hover: rgb(var(--color-orange-rgb), 0.2);
+  --codeblock-error-background: rgb(var(--color-red-rgb), 0.1);
+  --codeblock-error-background-hover: rgb(var(--color-red-rgb), 0.2);
+  --codeblock-add-background: rgb(var(--color-green-rgb), 0.1);
+  --codeblock-add-background-hover: rgb(var(--color-green-rgb), 0.2);
+  --codeblock-remove-background: rgb(var(--color-red-rgb), 0.1);
+  --codeblock-remove-background-hover: rgb(var(--color-red-rgb), 0.2);
+
+  --codeblock-highlighted-word-padding-x: var(--size-2-2);
+  --codeblock-highlighted-word-background: transparent;
+  --codeblock-highlighted-word-border-width: 1px;
+  --codeblock-highlighted-word-border-color: rgb(var(--mono-rgb-100), 0.3);
+  --codeblock-highlighted-word-radius: 0.2em;
+
+  --codeblock-unfocused-filter: blur(0.095rem);
+  --codeblock-whitepsace-color: rgb(var(--mono-rgb-100), 0.1);
+}
+
+.markdown-rendered pre.codeblock {
+  padding: var(--codeblock-padding-y) 0;
+
+  > code {
+    display: block;
+    width: 100%;
+    min-width: fit-content;
+  }
+
+  span.line {
+    display: block;
+    transition: all 0.1s;
+    direction: ltr;
+
+    > span:last-child::before {
+      content: "\200B";
+    }
+  }
+
+  &:not(.codeblock-line-numbers) span.line {
+    padding-inline: var(--codeblock-padding-x);
+  }
+
+  &:not(.codeblock-word-wrap) span.line {
+    white-space: pre;
+  }
+}
+
+/**
+ * Line Highlight
+ */
+pre.codeblock-line-hover {
+  > code > span.line {
+    &:is(:focus, :focus-within, :hover) {
+      background-color: var(--codeblock-line-background-hover);
+      background-attachment: fixed;
+    }
+  }
+}
+
+/**
+ * Line Numbers
+ */
+.markdown-rendered pre.codeblock-line-numbers {
+  counter-reset: line-number;
+
+  > code > span.line {
+    position: relative;
+    padding-inline: calc(var(--codeblock-line-number-width) + var(--codeblock-line-number-space))
+      var(--codeblock-padding-x);
+    counter-increment: line-number;
+
+    &::before {
+      position: absolute;
+      inset-block: 0;
+      left: 0;
+      width: var(--codeblock-line-number-width);
+      color: var(--codeblock-line-number-color);
+      text-align: right;
+      content: counter(line-number);
+    }
+  }
+
+  &.codeblock-line-hover > code > span.line:is(:focus, :focus-within, :hover)::before {
+    color: var(--codeblock-line-number-color-hover);
+  }
+}
+
+/**
+ * Transformers
+ */
+.markdown-rendered pre.codeblock {
+  .highlighted {
+    background-color: var(--codeblock-highlighted-background);
+  }
+
+  .highlighted-word {
+    padding-inline: var(--codeblock-highlighted-word-padding-x);
+    background-color: var(--codeblock-highlighted-word-background);
+    border: var(--codeblock-highlighted-word-border-width) solid var(--codeblock-highlighted-word-border-color);
+    border-radius: var(--codeblock-highlighted-word-radius);
+  }
+
+  .highlighted.warning {
+    background-color: var(--codeblock-warning-background);
+  }
+
+  &.codeblock-line-hover .highlighted.warning:is(:focus, :focus-within, :hover) {
+    background-color: var(--codeblock-warning-background-hover);
+  }
+
+  .highlighted.error {
+    background-color: var(--codeblock-error-background);
+  }
+
+  &.codeblock-line-hover .highlighted.error:is(:focus, :focus-within, :hover) {
+    background-color: var(--codeblock-error-background-hover);
+  }
+
+  .diff:is(.add, .remove) > span:first-child::before {
+    position: absolute;
+    left: 0;
+    padding-inline: var(--size-2-2);
+  }
+
+  .diff.add {
+    background-color: var(--codeblock-add-background);
+
+    > span:first-child::before {
+      color: var(--color-green);
+      content: "+";
+      background-color: var(--codeblock-add-background);
+    }
+  }
+
+  &.codeblock-line-hover .diff.add:is(:focus, :focus-within, :hover) {
+    background-color: var(--codeblock-add-background-hover);
+  }
+
+  .diff.remove {
+    background-color: var(--codeblock-remove-background);
+
+    & > span:first-child::before {
+      color: var(--color-red);
+      content: "−";
+      background-color: var(--codeblock-remove-background);
+    }
+  }
+
+  &.codeblock-line-hover .diff.remove:is(:focus, :focus-within, :hover) {
+    background-color: var(--codeblock-remove-background-hover);
+  }
+
+  &:has(.focused):not(:is(:focus, :focus-within, :hover)) span.line:not(.focused) {
+    filter: var(--codeblock-unfocused-filter);
+  }
+
+  .space::before {
+    position: absolute;
+    color: var(--codeblock-whitepsace-color);
+  }
+
+  .space::before {
+    content: "·";
+  }
+
+  .tab::before {
+    content: "⇥";
+  }
+}
