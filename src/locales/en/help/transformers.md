@@ -1,0 +1,1 @@
+Transformers offer a convenient way to decorate code blocks with various effects. Learn more about Shiki transformers on the [official website](https://shiki.matsu.io/packages/transformers) or by clicking on the help icons for each transformer.
