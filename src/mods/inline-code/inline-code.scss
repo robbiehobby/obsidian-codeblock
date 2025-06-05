@@ -1,0 +1,9 @@
+.markdown-rendered code.syntax-inline[class*="language-"] {
+  display: inline;
+}
+
+@each $color in (red, orange, yellow, green, cyan, blue, purple, pink, gray) {
+  .markdown-rendered code.syntax-inline-#{"" + $color} {
+    color: var(--color-#{$color});
+  }
+}

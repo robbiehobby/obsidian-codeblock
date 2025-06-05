@@ -1,0 +1,35 @@
+body {
+  --syntax-line-numbers-width: 6ch;
+  --syntax-line-numbers-space: var(--size-4-4);
+  --syntax-line-numbers-color: var(--text-faint);
+  --syntax-line-numbers-color-hover: var(--code-normal);
+}
+
+.markdown-rendered pre.syntax-block {
+  &:has([data-line-numbers]) {
+    counter-reset: line-number;
+
+    .line:not(.meta) {
+      counter-increment: line-number;
+    }
+
+    .line {
+      position: relative;
+      padding-inline: calc(var(--syntax-line-numbers-width) + var(--syntax-line-numbers-space)) var(--syntax-padding-x);
+
+      &::before {
+        position: absolute;
+        inset-block: 0;
+        left: 0;
+        width: var(--syntax-line-numbers-width);
+        color: var(--syntax-line-numbers-color);
+        text-align: right;
+        content: counter(line-number);
+      }
+    }
+
+    &:has([data-line-hover]) .line:is(:focus, :focus-within, :hover)::before {
+      color: var(--syntax-line-numbers-color-hover);
+    }
+  }
+}

@@ -1,0 +1,9 @@
+.markdown-rendered pre.syntax-block {
+  &:has([data-word-wrap]) {
+    overflow-x: unset;
+
+    .line {
+      white-space: pre-wrap;
+    }
+  }
+}

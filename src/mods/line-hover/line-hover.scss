@@ -1,0 +1,10 @@
+body {
+  --syntax-line-background-hover: rgb(var(--mono-rgb-100), 0.08);
+}
+
+.markdown-rendered pre.syntax-block {
+  &:has([data-line-hover]) .line:is(:focus, :focus-within, :hover) {
+    background-color: var(--syntax-line-background-hover);
+    background-attachment: fixed;
+  }
+}

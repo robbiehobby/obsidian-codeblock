@@ -1,0 +1,25 @@
+body {
+  --syntax-whitespace-color: var(--text-faint);
+}
+
+.markdown-rendered pre.syntax-block {
+  .space,
+  .tab {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      inset-inline: 0;
+      color: var(--syntax-whitespace-color);
+      text-align: center;
+    }
+  }
+
+  .space::before {
+    content: "·";
+  }
+
+  .tab::before {
+    content: "⇥";
+  }
+}

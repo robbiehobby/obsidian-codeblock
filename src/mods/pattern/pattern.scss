@@ -1,0 +1,25 @@
+body {
+  --syntax-match-padding-x: var(--size-2-2);
+  --syntax-match-background: rgb(var(--mono-rgb-100), var(--syntax-highlight-opacity));
+  --syntax-match-background-opacity: 0.2;
+  --syntax-match-border-width: 1px;
+  --syntax-match-border-opacity: 0.3;
+  --syntax-match-border-color: rgb(var(--mono-rgb-100), var(--syntax-match-border-opacity));
+  --syntax-match-radius: 0.2em;
+}
+
+.markdown-rendered pre.syntax-block {
+  .match {
+    padding-inline: var(--syntax-match-padding-x);
+    background-color: var(--syntax-match-background);
+    border: var(--syntax-match-border-width) solid var(--syntax-match-border-color);
+    border-radius: var(--syntax-match-radius);
+
+    @each $color in (red, orange, yellow, green, cyan, blue, purple, pink, gray) {
+      &.match-#{"" + $color} {
+        --syntax-match-background: rgb(var(--color-#{$color}-rgb), var(--syntax-match-background-opacity));
+        --syntax-match-border-color: rgb(var(--color-#{$color}-rgb), var(--syntax-match-border-opacity));
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+body {
+  --syntax-padding-y: var(--size-4-4);
+  --syntax-padding-x: var(--size-4-5);
+}
+
+.syntax-hidden {
+  display: none;
+}
+
+.modal.syntax-modal {
+  @media screen and (width >= 700px) {
+    width: 550px;
+  }
+
+  p {
+    line-height: var(--line-height-normal);
+    text-wrap: pretty;
+  }
+}
+
+.markdown-rendered pre.syntax-block {
+  --color-gray-rgb: var(--mono-rgb-100);
+
+  padding: 0;
+  overflow-x: auto;
+
+  > code {
+    display: block;
+    width: 100%;
+    min-width: fit-content;
+    padding-block: var(--syntax-padding-y);
+    font-size: var(--code-size);
+    font-weight: var(--code-weight);
+    user-select: text;
+  }
+}
+
+.markdown-source-view pre.syntax-block {
+  .copy-code-button {
+    display: none !important;
+  }
+
+  + .edit-block-button {
+    &::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+    }
+  }
+}

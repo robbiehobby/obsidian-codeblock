@@ -1,0 +1,13 @@
+.markdown-rendered pre.syntax-block {
+  .line {
+    display: block;
+    padding-inline: var(--syntax-padding-x);
+    white-space: pre;
+    transition: all 0.1s;
+    direction: ltr;
+
+    > span:last-child::before {
+      content: "\200B";
+    }
+  }
+}

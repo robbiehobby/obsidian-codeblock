@@ -1,0 +1,15 @@
+.markdown-rendered pre.syntax-block {
+  .line.meta {
+    color: var(--code-comment);
+
+    &:last-child {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0;
+    }
+  }
+
+  &:has([data-line-numbers]) .line.meta::before {
+    content: "";
+  }
+}

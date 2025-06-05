@@ -1,0 +1,87 @@
+body {
+  --syntax-highlight-opacity: 0.1;
+  --syntax-highlight-opacity-hover: 0.2;
+  --syntax-highlight-add-background: rgb(var(--color-green-rgb), var(--syntax-highlight-opacity));
+  --syntax-highlight-add-background-hover: rgb(var(--color-green-rgb), var(--syntax-highlight-opacity-hover));
+  --syntax-highlight-del-background: rgb(var(--color-red-rgb), var(--syntax-highlight-opacity));
+  --syntax-highlight-del-background-hover: rgb(var(--color-red-rgb), var(--syntax-highlight-opacity-hover));
+  --syntax-highlight-chg-background: rgb(var(--color-blue-rgb), var(--syntax-highlight-opacity));
+  --syntax-highlight-chg-background-hover: rgb(var(--color-blue-rgb), var(--syntax-highlight-opacity-hover));
+  --syntax-highlight-focus-filter: blur(0.095rem);
+}
+
+.markdown-rendered pre.syntax-block {
+  .line[class*="highlight-"] {
+    background-color: rgb(var(--color-gray-rgb), var(--syntax-highlight-opacity));
+  }
+
+  &:has([data-line-hover]) .line[class*="highlight-"]:is(:focus, :focus-within, :hover) {
+    background-color: rgb(var(--color-gray-rgb), var(--syntax-highlight-opacity-hover));
+  }
+
+  .line.highlight-add,
+  .line.highlight-del,
+  .line.highlight-chg {
+    > span:first-child::before {
+      position: absolute;
+      left: 0;
+      padding-inline: var(--size-2-2);
+    }
+  }
+
+  .line.highlight-add {
+    background-color: var(--syntax-highlight-add-background);
+
+    > span:first-child::before {
+      color: var(--color-green);
+      content: "+";
+      background-color: var(--syntax-highlight-add-background);
+    }
+  }
+
+  &:has([data-line-hover]) .line.highlight-add:is(:focus, :focus-within, :hover) {
+    background-color: var(--syntax-highlight-add-background-hover);
+  }
+
+  .line.highlight-del {
+    background-color: var(--syntax-highlight-del-background);
+
+    & > span:first-child::before {
+      color: var(--color-red);
+      content: "−";
+      background-color: var(--syntax-highlight-del-background);
+    }
+  }
+
+  &:has([data-line-hover]) .line.highlight-del:is(:focus, :focus-within, :hover) {
+    background-color: var(--syntax-highlight-del-background-hover);
+  }
+
+  .line.highlight-chg {
+    background-color: var(--syntax-highlight-chg-background);
+
+    & > span:first-child::before {
+      color: var(--color-blue);
+      content: "•";
+      background-color: var(--syntax-highlight-chg-background);
+    }
+  }
+
+  &:has([data-line-hover]) .line.highlight-chg:is(:focus, :focus-within, :hover) {
+    background-color: var(--syntax-highlight-chg-background-hover);
+  }
+
+  &:has(.highlight-focus):not(:is(:focus, :focus-within, :hover)) .line:not(.highlight-focus) {
+    filter: var(--syntax-highlight-focus-filter);
+  }
+
+  @each $color in (red, orange, yellow, green, cyan, blue, purple, pink, gray) {
+    .line#{".highlight-" + $color} {
+      background-color: rgb(var(--color-#{$color}-rgb), var(--syntax-highlight-opacity));
+    }
+
+    &:has([data-line-hover]) .line#{".highlight-" + $color}:is(:focus, :focus-within, :hover) {
+      background-color: rgb(var(--color-#{$color}-rgb), var(--syntax-highlight-opacity-hover));
+    }
+  }
+}
